@@ -85,9 +85,6 @@ const Experience = () => {
 
                 <div className="space-y-8">
                     {experiences.map((exp, index) => {
-                        const CardTag = exp.orgLink ? 'a' : 'div';
-                        const hoverTextClass = exp.orgLink ? 'group-hover:text-black transition-colors' : '';
-
                         return (
                             <motion.div
                                 key={exp.title}
@@ -96,36 +93,39 @@ const Experience = () => {
                                 viewport={{ once: true }}
                                 transition={{ delay: index * 0.08 }}
                             >
-                                <CardTag
-                                    href={exp.orgLink}
-                                    target={exp.orgLink ? '_blank' : undefined}
-                                    rel={exp.orgLink ? 'noreferrer' : undefined}
-                                    className={`group relative block border border-gray-800 bg-dark-secondary p-6 sm:p-7 md:p-10 overflow-hidden transition-colors duration-300 ${
-                                        exp.orgLink
-                                            ? 'hover:border-fluo hover:bg-fluo hover:text-black cursor-pointer'
-                                            : ''
-                                    }`}
-                                >
+                                <div className="relative block border border-gray-800 bg-dark-secondary p-6 sm:p-7 md:p-10 overflow-hidden transition-colors duration-300 hover:border-fluo">
                                     <div className="absolute inset-x-0 top-0 h-1 bg-fluo opacity-20" />
                                     <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3 md:gap-4 mb-5 md:mb-6">
                                         <div>
-                                            <h3 className={`font-display text-xl sm:text-2xl md:text-3xl font-bold ${hoverTextClass}`}>
+                                            <h3 className="font-display text-xl sm:text-2xl md:text-3xl font-bold">
                                                 {exp.title}
                                             </h3>
-                                            <p className={`text-light-text mt-1 text-sm sm:text-base ${hoverTextClass}`}>
+                                            <p className="text-light-text mt-1 text-sm sm:text-base">
                                                 {exp.org}
                                             </p>
                                         </div>
-                                        <div className={`font-mono text-[0.65rem] sm:text-xs tracking-widest text-gray-400 uppercase ${hoverTextClass}`}>
+                                        <div className="font-mono text-[0.65rem] sm:text-xs tracking-widest text-gray-400 uppercase">
                                             {exp.dates}
                                         </div>
                                     </div>
-                                    <ul className={`list-disc pl-5 space-y-3 text-gray-300 text-sm sm:text-base leading-relaxed ${hoverTextClass}`}>
+                                    <ul className="list-disc pl-5 space-y-3 text-gray-300 text-sm sm:text-base leading-relaxed">
                                         {exp.bullets.map((bullet) => (
                                             <li key={bullet}>{bullet}</li>
                                         ))}
                                     </ul>
-                                </CardTag>
+                                    {exp.orgLink && (
+                                        <div className="pt-5">
+                                            <a
+                                                href={exp.orgLink}
+                                                target="_blank"
+                                                rel="noreferrer"
+                                                className="inline-flex items-center justify-center px-4 py-2 min-h-[44px] w-full sm:w-auto border-2 border-fluo bg-fluo text-black font-mono text-xs uppercase tracking-widest hover:bg-transparent hover:text-fluo transition-colors duration-300"
+                                            >
+                                                Live Demo
+                                            </a>
+                                        </div>
+                                    )}
+                                </div>
                             </motion.div>
                         );
                     })}
